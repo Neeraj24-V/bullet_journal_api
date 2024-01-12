@@ -46,7 +46,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(errorHandler);
 
-// Routes
+// routes
+app.get("/", (req, res) => {
+  res.send("Hi there!!! Your server is running");
+});
+
 // for login register routes
 app.use("/api/v1/journal/auth", userRouter);
 
