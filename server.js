@@ -13,7 +13,7 @@ const app = express();
 
 // Using cors
 const corsOptions = {
-  origin: "hhttps://bullet-journal-client.vercel.app",
+  origin: "https://bullet-journal-client.vercel.app",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
