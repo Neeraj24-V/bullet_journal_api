@@ -13,7 +13,7 @@ const app = express();
 
 // Using cors
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "hhttps://bullet-journal-client.vercel.app",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 } else {
   console.log(
-    "Development Environment Variables doesn't work on Production Environment",
+    "Development Environment Variables doesn't work on Production Environment"
   );
 }
 
