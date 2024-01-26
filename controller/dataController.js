@@ -51,7 +51,7 @@ const updateData = asyncHandler(async (req, res) => {
     res.sendStatus(400);
     throw new Error("user_id or todoId is required");
   }
-  const filter = {user_id: id, _id: todoId}
+  const filter = {user_id: user_id, _id: todoId}
   const update = req.body
   const updatedTodo = await Data.findOneAndUpdate(filter, update)
   if (!updatedTodo) {
