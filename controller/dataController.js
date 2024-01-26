@@ -45,7 +45,7 @@ const getData = asyncHandler(async (req, res) => {
 
 // Update Data
 const updateData = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const { user_id } = req.params;
   const { todoId } = req.query;
   if (!id || !todoId) {
     res.sendStatus(400);
