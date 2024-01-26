@@ -12,10 +12,23 @@ const cors = require("cors");
 const app = express();
 
 // Using cors
+// const corsOptions = {
+//   origin: "https://bullet-journal-client.vercel.app",
+//   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+// };
+
+const allowedOrigins = ["https://bullet-journal-client.vercel.app", "http://localhost:5173"]
+
 const corsOptions = {
-  origin: "https://bullet-journal-client.vercel.app",
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+  origin: function (origin, callback) {
+    if(!origin || allowedOrigins.includes(origin) || allowedOrigins.includes("localhost")) {
+      callback(null, true)
+    }else {
+      callback(new Error("not allowed by CORS"))
+    }
+  },
+  optionsSuccessStatus: 200
+}
 
 app.use(cors(corsOptions));
 
