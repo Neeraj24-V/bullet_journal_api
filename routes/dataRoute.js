@@ -11,7 +11,7 @@ netRouter.use(validateToken);
 // Route for creating Tasks
 netRouter.post("/data", createData);
 
-netRouter.patch('/data/:id', updateData)
+netRouter.patch('/data/:user_id', updateData)
 
 // ToDo: Implement Route for querying from and to date
 
