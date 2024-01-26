@@ -54,7 +54,7 @@ const updateData = asyncHandler(async (req, res) => {
   }
   const filter = {user_id: user_id, _id: todoId}
   const update = req.body
-  const updatedTodo = await Data.findOneAndUpdate(filter, update)
+  const updatedTodo = await Data.findOneAndUpdate(filter, update, {new: true})
   if (!updatedTodo) {
     res.sendStatus(400);
     throw new Error("Data not updated");
