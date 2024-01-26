@@ -47,6 +47,7 @@ const getData = asyncHandler(async (req, res) => {
 const updateData = asyncHandler(async (req, res) => {
   const { user_id } = req.params;
   const { todoId } = req.query;
+  console.log(req.query, req.params)
   if (!user_id || !todoId) {
     res.sendStatus(400);
     throw new Error("user_id or todoId is required");
