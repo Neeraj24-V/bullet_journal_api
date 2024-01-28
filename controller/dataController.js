@@ -47,19 +47,37 @@ const getData = asyncHandler(async (req, res) => {
 const updateData = asyncHandler(async (req, res) => {
   const { user_id } = req.params;
   const { todoId } = req.query;
-  console.log(req.query, req.params)
   if (!user_id || !todoId) {
     res.sendStatus(400);
     throw new Error("user_id or todoId is required");
   }
-  const filter = {user_id: user_id, _id: todoId}
-  const update = req.body
-  const updatedTodo = await Data.findOneAndUpdate(filter, update, {new: true})
+  const filter = { user_id: user_id, _id: todoId };
+  const update = req.body;
+  const updatedTodo = await Data.findOneAndUpdate(filter, update, {
+    new: true,
+  });
   if (!updatedTodo) {
     res.sendStatus(400);
     throw new Error("Data not updated");
   }
-  res.status(201).json(updatedTodo)
+  res.status(201).json(updatedTodo);
+});
+
+// Delete Data
+const deleteData = asyncHandler(async (req, res) => {
+  const { user_id } = req.params;
+  const { todoId } = req.query;
+  if (!user_id || !todoId) {
+    res.sendStatus(400);
+    throw new Error("user_id or todoId is required");
+  }
+  const filter = { user_id: user_id, _id: todoId };
+  const deleteTodo = await Data.findOneAndDelete(filter);
+  if (!deleteTodo) {
+    res.sendStatus(400);
+    throw new Error("Data not deleted");
+  }
+  res.status(200).json({success: true});
 });
 
 // ToDo: Implement Route for querying from and to date
@@ -67,5 +85,6 @@ const updateData = asyncHandler(async (req, res) => {
 module.exports = {
   createData,
   getData,
-  updateData
+  updateData,
+  deleteData
 };

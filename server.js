@@ -8,6 +8,7 @@ const netRouter = require("./routes/dataRoute");
 const logsRouter = require("./routes/logsRoute");
 const habitRouter = require("./routes/habitsRoute");
 const cors = require("cors");
+require('./ping-cron-job')
 
 const app = express();
 
