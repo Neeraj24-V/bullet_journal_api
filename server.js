@@ -1,14 +1,13 @@
 const express = require("express");
 const connectDB = require("./db/dbConnection");
 const errorHandler = require("./middlewares/errorHandler");
-const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/userRoute");
-// const passport = require("passport");
 const netRouter = require("./routes/dataRoute");
 const logsRouter = require("./routes/logsRoute");
 const habitRouter = require("./routes/habitsRoute");
 const cors = require("cors");
-require('./ping-cron-job')
+require("./utils/ping-cron-job");
+require("./utils/mail");
 
 const app = express();
 
@@ -18,18 +17,25 @@ const app = express();
 //   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 // };
 
-const allowedOrigins = ["https://bullet-journal-client.vercel.app", "http://localhost:5173"]
+const allowedOrigins = [
+  "https://bullet-journal-client.vercel.app",
+  "http://localhost:5173",
+];
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if(!origin || allowedOrigins.includes(origin) || allowedOrigins.includes("localhost")) {
-      callback(null, true)
-    }else {
-      callback(new Error("not allowed by CORS"))
+    if (
+      !origin ||
+      allowedOrigins.includes(origin) ||
+      allowedOrigins.includes("localhost")
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("not allowed by CORS"));
     }
   },
-  optionsSuccessStatus: 200
-}
+  optionsSuccessStatus: 200,
+};
 
 app.use(cors(corsOptions));
 
@@ -37,7 +43,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 } else {
   console.log(
-    "Development Environment Variables doesn't work on Production Environment"
+    "Development Environment Variables doesn't work on Production Environment",
   );
 }
 
@@ -57,7 +63,6 @@ connectDB((err) => {
 // app.use(passport.initialize())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cookieParser());
 app.use(errorHandler);
 
 // routes
